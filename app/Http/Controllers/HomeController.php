@@ -113,6 +113,12 @@ class HomeController extends Controller
             $order->status = 'Not Delivered';
 
             $order->save();
+
+            $product = Product::where('title', $productname)->first();
+            if ($product) {
+                $product->quantity -= $request->quantity[$key];
+                $product->save();
+            }
         }
 
         DB::table('carts')->where('phone', $phone)->delete();

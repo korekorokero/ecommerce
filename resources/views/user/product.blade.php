@@ -25,9 +25,13 @@
                         <p>{{$product->description}}</p>
                         <form action="{{url('addcart', $product->id)}}" method="POST">
                             @csrf
-                            <input type="number" value="1" min="1" class="form-control" style="width: 100px;" name="quantity">
+                            <input type="number" value="1" min="1" max="{{$product->quantity}}" class="form-control" style="width: 100px;" name="quantity">
                             <br>
+                            @if($product->quantity != 0)
                             <input class="btn btn-primary" type="submit" value="Add to Cart">
+                            @else
+                            <input class="btn btn-primary disabled" type="submit" aria-disabled="true" value="Add to Cart">
+                            @endif
                         </form>
                     </div>
                 </div>
