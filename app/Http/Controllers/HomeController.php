@@ -44,7 +44,7 @@ class HomeController extends Controller
             $data = Product::paginate(3);
             return view('user.home', compact('data'));
         }
-        $data = Product::where('title', 'Like', '%'.$search.'%')->get();
+        $data = Product::where('title', 'LIKE', '%' . $search . '%')->orWhere('description', 'LIKE', '%' . $search . '%')->get();
 
         return view('user.home', compact('data'));
     }
